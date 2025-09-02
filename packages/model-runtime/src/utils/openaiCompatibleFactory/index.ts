@@ -104,10 +104,10 @@ interface OpenAICompatibleFactoryOptions<T extends Record<string, any> = any> {
     invalidAPIKey: ILobeAgentRuntimeErrorType;
   };
   models?:
-    | ((params: { client: OpenAI }) => Promise<ChatModelCard[]>)
-    | {
-        transformModel?: (model: OpenAI.Model) => ChatModelCard;
-      };
+  | ((params: { client: OpenAI }) => Promise<ChatModelCard[]>)
+  | {
+    transformModel?: (model: OpenAI.Model) => ChatModelCard;
+  };
   provider: string;
   responses?: {
     handlePayload?: (
@@ -228,9 +228,9 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
         const postPayload = chatCompletion?.handlePayload
           ? chatCompletion.handlePayload(payload, this._options)
           : ({
-              ...payload,
-              stream: payload.stream ?? true,
-            } as OpenAI.ChatCompletionCreateParamsStreaming);
+            ...payload,
+            stream: payload.stream ?? true,
+          } as OpenAI.ChatCompletionCreateParamsStreaming);
 
         // new openai Response API
         if ((postPayload as any).apiMode === 'responses') {
@@ -285,9 +285,9 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
           return StreamingResponse(
             chatCompletion?.handleStream
               ? chatCompletion.handleStream(prod, {
-                  callbacks: streamOptions.callbacks,
-                  inputStartAt,
-                })
+                callbacks: streamOptions.callbacks,
+                inputStartAt,
+              })
               : OpenAIStream(prod, { ...streamOptions, inputStartAt }),
             {
               headers: options?.headers,
@@ -308,9 +308,9 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
         return StreamingResponse(
           chatCompletion?.handleStream
             ? chatCompletion.handleStream(stream, {
-                callbacks: streamOptions.callbacks,
-                inputStartAt,
-              })
+              callbacks: streamOptions.callbacks,
+              inputStartAt,
+            })
             : OpenAIStream(stream, { ...streamOptions, inputStartAt }),
           {
             headers: options?.headers,
@@ -527,11 +527,11 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
         ...res,
         ...(reasoning || reasoning_effort
           ? {
-              reasoning: {
-                ...reasoning,
-                ...(reasoning_effort && { effort: reasoning_effort }),
-              },
-            }
+            reasoning: {
+              ...reasoning,
+              ...(reasoning_effort && { effort: reasoning_effort }),
+            },
+          }
           : {}),
         input,
         store: false,
