@@ -1,6 +1,6 @@
 const getLoaderConfig = () => ({
-  chunkOverlap: 100,
-  chunkSize: 200,
+  chunkOverlap: 50,
+  chunkSize: 100,
 });
 
 export const loaderConfig = getLoaderConfig();
