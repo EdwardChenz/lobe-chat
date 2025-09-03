@@ -82,7 +82,7 @@ export class Unstructured {
         files: { content: params.fileContent, fileName: params.filename },
 
         includeOrigElements: true,
-        maxCharacters: params.maxCharacters || 400,
+        maxCharacters: params.maxCharacters || 200,
         strategy: params.strategy,
         uniqueElementIds: true,
       },
