@@ -85,6 +85,9 @@ export const chatRag: StateCreator<ChatStore, [['zustand/devtools', never]], [],
 
       get().internal_toggleMessageRAGLoading(false, id);
 
+      console.log('--- LobeChat RAG ---');
+      console.log('[retrieveChunks] rewriteQuery:', rewriteQuery);
+      console.log('[retrieveChunks] chunks:', chunks);
       return { chunks, queryId, rewriteQuery };
     } catch {
       get().internal_toggleMessageRAGLoading(false, id);
