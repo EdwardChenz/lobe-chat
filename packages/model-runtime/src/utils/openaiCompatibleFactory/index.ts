@@ -397,6 +397,9 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
       options?: EmbeddingsOptions,
     ): Promise<Embeddings[]> {
       try {
+        console.log('--- LobeChat Request ---');
+        console.log('[embeddings] model:', payload.model, 'input:', payload.input);
+
         const res = await this.client.embeddings.create(
           { ...payload, encoding_format: 'float', user: options?.user },
           { headers: options?.headers, signal: options?.signal },
