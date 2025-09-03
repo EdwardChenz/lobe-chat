@@ -21,21 +21,15 @@ export const parseFilesConfig = (envString: string = ''): SystemEmbeddingConfig 
     const [key, value] = pair.split('=').map((s) => s.trim());
 
     if (key && value) {
-      const [provider, ...modelParts] = value.split('/');
-      const model = modelParts.join('/');
-
       if (protectedKeys.includes(key)) {
         switch (key) {
           case 'embedding_model': {
-            if (!provider || !model) {
-              throw new Error(
-                'Invalid environment variable format.  expected of the form embedding_model=provider/model',
-              );
-            }
-            config.embeddingModel = { model: model.trim(), provider: provider.trim() };
+            config.embeddingModel = { model: value.trim(), provider: '' };
             break;
           }
           case 'reranker_model': {
+            const [provider, ...modelParts] = value.split('/');
+            const model = modelParts.join('/');
             if (!provider || !model) {
               throw new Error(
                 'Invalid environment variable format.  expected of the form reranker_model=provider/model',

@@ -27,6 +27,7 @@ export { getModelPropertyWithFallback } from './utils/getFallbackModelProperty';
 export { createOpenAICompatibleRuntime } from './utils/openaiCompatibleFactory';
 export { pruneReasoningPayload } from './utils/openaiHelpers';
 export { parseDataUri } from './utils/uriParser';
+export { detectModelProvider } from './utils/modelParse';
 export { LobeVolcengineAI } from './volcengine';
 export { LobeZeroOneAI } from './zeroone';
 export { LobeZhipuAI } from './zhipu';

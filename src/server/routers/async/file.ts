@@ -22,6 +22,8 @@ import {
   AsyncTaskStatus,
   IAsyncTaskError,
 } from '@/types/asyncTask';
+import { detectModelProvider } from '@lobechat/model-runtime';
+
 import { safeParseJSON } from '@/utils/safeParseJSON';
 import { sanitizeUTF8 } from '@/utils/sanitizeUTF8';
 
@@ -57,8 +59,12 @@ export const fileRouter = router({
 
       const asyncTask = await ctx.asyncTaskModel.findById(input.taskId);
 
-      const { model, provider } =
+      let { model, provider } =
         getServerDefaultFilesConfig().embeddingModel || DEFAULT_FILE_EMBEDDING_MODEL_ITEM;
+
+      if (!provider) {
+        provider = detectModelProvider(model);
+      }
 
       if (!asyncTask) throw new TRPCError({ code: 'BAD_REQUEST', message: 'Async Task not found' });
 
